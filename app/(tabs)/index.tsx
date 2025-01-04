@@ -1,41 +1,79 @@
-import { useEvent } from "expo";
-import { useVideoPlayer, VideoView } from "expo-video";
-import { useEffect, useRef } from "react";
-import { StyleSheet, View, Button } from "react-native";
-import Video, { VideoRef } from "react-native-video";
+import { StyleSheet, Text, View, Platform, Dimensions } from "react-native";
+import { Image } from "expo-image";
+import { useState, useEffect, useMemo } from "react";
+const image = require("@/assets/images/chat.jpg");
 
-const videoSource = require("@/assets/video/3677-SOS-maltraitance-animale-Video.mp4");
+export default function Index() {
+  const [screenSize, setScreenSize] = useState(Dimensions.get("window"));
 
-export default function VideoScreen() {
-  const videoRef = useRef<VideoRef>(null);
+  useEffect(() => {
+    const onResize = () => {
+      setScreenSize(Dimensions.get("window"));
+    };
+    const subscription = Dimensions.addEventListener("change", onResize);
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  const isDesktopFormat = useMemo<boolean>(() => {
+    const { width } = screenSize;
+    return Platform.OS === "web" && width > 768;
+  }, [screenSize]);
 
   return (
-    <View>
-      <Video
-        // Can be a URL or a local file.
-        source={videoSource}
-        // Store reference
-        ref={videoRef}
-        // Callback when remote video is buffering
-        // Callback when video cannot be loaded
-      />
+    <View style={styles.container}>
+      <View style={[styles.imageWrapper, isDesktopFormat && { height: "50%" }]}>
+        <Image source={image} style={styles.image} contentFit='cover' />
+        <Text style={styles.title}>Animal maltraité ?</Text>
+        <Text style={styles.alert}>Alertez au</Text>
+        <Text style={styles.number}>3677</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
+  container: {
     flex: 1,
-    padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 50,
+    backgroundColor: "#000",
   },
-  video: {
-    width: 350,
-    height: 275,
+  imageWrapper: {
+    height: "100%",
+    position: "relative",
   },
-  controlsContainer: {
-    padding: 10,
+  image: {
+    width: "100%",
+    height: "100%",
+  },
+  title: {
+    position: "absolute",
+    top: 20,
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    color: "white",
+    fontSize: 40,
+    fontWeight: "bold",
+  },
+  alert: {
+    position: "absolute",
+    bottom: 150,
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    color: "white",
+    fontSize: 40,
+    fontWeight: "bold",
+  },
+  number: {
+    position: "absolute",
+    bottom: 60,
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    color: "red",
+    fontSize: 80,
+    fontWeight: "bold",
   },
 });

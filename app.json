@@ -24,10 +24,9 @@
     },
     "plugins": [
       [
-        "expo-video",
+        "expo-font",
         {
-          "supportsBackgroundPlayback": true,
-          "supportsPictureInPicture": true
+          "fonts": ["node_modules/@expo-google-fonts/montserrat/Montserrat_900Black.ttf"]
         }
       ],
       "expo-router",
@@ -39,7 +38,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
