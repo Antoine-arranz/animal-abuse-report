@@ -11,6 +11,7 @@ export default function TabLayout() {
           paddingBottom: 0,
           height: 60,
         },
+        headerShown : false
       }}
     >
       <Tabs.Screen
@@ -46,16 +47,10 @@ export default function TabLayout() {
         options={{
           title: "3677",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name='cog' color={color} />
+            <FontAwesome size={28} name='phone' color={color} />
           ),
         }}
       />
     </Tabs>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 0,
-  },
-});

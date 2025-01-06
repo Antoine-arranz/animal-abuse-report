@@ -1,35 +1,37 @@
-import { StyleSheet, Text, View, Platform, Dimensions } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Image } from "expo-image";
-import { useState, useEffect, useMemo } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 const image = require("@/assets/images/chat.jpg");
 
 export default function Index() {
-  const [screenSize, setScreenSize] = useState(Dimensions.get("window"));
-
-  useEffect(() => {
-    const onResize = () => {
-      setScreenSize(Dimensions.get("window"));
-    };
-    const subscription = Dimensions.addEventListener("change", onResize);
-    return () => {
-      subscription.remove();
-    };
-  }, []);
-
-  const isDesktopFormat = useMemo<boolean>(() => {
-    const { width } = screenSize;
-    return Platform.OS === "web" && width > 768;
-  }, [screenSize]);
-
   return (
-    <View style={styles.container}>
-      <View style={[styles.imageWrapper, isDesktopFormat && { height: "50%" }]}>
-        <Image source={image} style={styles.image} contentFit='cover' />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.imageWrapper}>
+        <Image source={image} style={styles.image} contentFit="cover" />
         <Text style={styles.title}>Animal maltraité ?</Text>
         <Text style={styles.alert}>Alertez au</Text>
         <Text style={styles.number}>3677</Text>
       </View>
-    </View>
+      <View style={styles.informations}>
+        <View style={styles.warning}>
+          <Text>
+            <FontAwesome size={28} name='warning' color='red' style={styles.warningIcon} /> Ligne réservée aux signalements nécessitant la prise en charge
+            urgente d'animaux maltraités.
+          </Text>
+        </View>
+        <View style={styles.infos}>
+          <Text style={styles.infosJour}>
+            7 jours sur 7, 365 jours par an, prix d’un appel local
+          </Text>
+
+          <Text style={styles.infosTelephone}>
+            Du lundi au vendredi de 9h à 19h – Samedi : 10h à 19h – Dimanche et
+            jour férié : de 10h à 17h
+          </Text>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -39,8 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
   },
   imageWrapper: {
-    height: "100%",
-    position: "relative",
+    flex: 1,
   },
   image: {
     width: "100%",
@@ -53,12 +54,12 @@ const styles = StyleSheet.create({
     right: 0,
     textAlign: "center",
     color: "white",
-    fontSize: 40,
+    fontSize: 50,
     fontWeight: "bold",
   },
   alert: {
     position: "absolute",
-    bottom: 150,
+    bottom: 90,
     left: 0,
     right: 0,
     textAlign: "center",
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   },
   number: {
     position: "absolute",
-    bottom: 60,
+    bottom: 0,
     left: 0,
     right: 0,
     textAlign: "center",
@@ -76,4 +77,28 @@ const styles = StyleSheet.create({
     fontSize: 80,
     fontWeight: "bold",
   },
+  warning: {
+    backgroundColor: "white",
+    padding:5
+  },
+  infosTelephone: {
+    color: 'white',
+    marginTop: 10,
+  },
+  infosJour: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  informations: {
+    margin: 15,
+    padding: 10,
+    display: "flex",
+    gap: 10,
+  },
+  infos: {
+  },
+  warningIcon: {
+    fontSize: 15,
+
+  }
 });
