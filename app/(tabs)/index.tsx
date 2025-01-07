@@ -13,18 +13,20 @@ export default function Index() {
       <ScrollView>
         <Logo />
         <View style={styles.imageWrapper}>
-          <Image source={image} style={styles.image} contentFit="cover" />
+          <Image source={image} style={styles.image} contentFit='cover' />
           <Text style={styles.title}>Animal maltraité ?</Text>
           <Text style={styles.alert}>Alertez au</Text>
-          <Text style={styles.number}>3677</Text>
+          <Text style={{ $$css: true, _: "text-xl text-red-200 font-medium" }}>
+            3677
+          </Text>
         </View>
         <View style={styles.informations}>
           <View style={styles.warning}>
             <Text>
               <FontAwesome
                 size={28}
-                name="warning"
-                color="red"
+                name='warning'
+                color='red'
                 style={styles.warningIcon}
               />{" "}
               Ligne réservée aux signalements nécessitant la prise en charge
