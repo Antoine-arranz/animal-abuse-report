@@ -1,18 +1,14 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { StyleSheet, Text, View } from "react-native";
+import WarningIcon from "./common/WarningIcon";
 
 export default function AlerteBandeau() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        {" "}
-        <FontAwesome
-          size={28}
-          name="warning"
-          color="white"
-          style={styles.icon}
-        />{" "}
+        <WarningIcon color='white' />
         EN CAS D'URGENCE, APPELEZ LE 17
+        <WarningIcon color='white' />
       </Text>
     </View>
   );
@@ -26,10 +22,10 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
     fontWeight: "bold",
-      textAlign: "center",
-    fontSize:18
-    },
-    icon: {
-        fontSize:18
-  }
+    textAlign: "center",
+    fontSize: 18,
+  },
+  icon: {
+    fontSize: 18,
+  },
 });

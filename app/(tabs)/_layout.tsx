@@ -1,8 +1,7 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
 import { StyleSheet, View } from "react-native";
-import '../../global.css';
-
+import "../../global.css"; // Assure-toi que le chemin est correct
 export default function TabLayout() {
   return (
     <Tabs
@@ -12,7 +11,7 @@ export default function TabLayout() {
           paddingBottom: 0,
           height: 60,
         },
-        headerShown : false
+        headerShown: false,
       }}
     >
       <Tabs.Screen
