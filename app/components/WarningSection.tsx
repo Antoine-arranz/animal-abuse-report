@@ -7,7 +7,7 @@ export default function WarningSection() {
     <View className='space-y-2.5 bg-black px-5 pb-3'>
       <View className='bg-white p-1.5'>
         <Text className='flex items-center justify-center gap-2 text-xs'>
-          <WarningIcon color='red' />
+          <WarningIcon color='red'/>
           <Text>
             Ligne réservée aux signalements nécessitant la prise en charge
             urgente d'animaux maltraités.

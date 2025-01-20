@@ -8,7 +8,9 @@ module.exports = {
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
-      backGroundGrey: "#ededed",
+      backgroundImage: {
+        "custom-gradient": "linear-gradient(90deg, #d41116 0%, #6a0927 100%)",
+      },
     },
   },
   plugins: [],
