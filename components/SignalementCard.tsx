@@ -23,24 +23,29 @@ export default function SignalementCard({
   onPress,
 }: SignalementCardProps) {
   return (
-    <Card variant="elevated">
-      <View className="w-full items-center justify-center">
-        <Image 
-          source={imageSource} 
-          className="w-40 h-40" 
-          contentFit="contain"
-          contentPosition="center"
+    <Card variant='elevated'>
+      <View className='w-full items-center justify-center'>
+        <Image
+          source={imageSource}
+          className='w-36 h-36'
+          contentFit='contain'
+          contentPosition='center'
         />
       </View>
-      <Text variant="title" weight="bold" color="secondary" className="text-center mb-4">
+      <Text
+        variant='subtitle'
+        weight='bold'
+        color='secondary'
+        className='text-center mb-4'
+      >
         {title}
       </Text>
-      <Text variant="body" color="secondary" className="text-center mb-4">
+      <Text variant='body' color='secondary' className='mb-4'>
         {description}
       </Text>
-      <Button 
-        variant="secondary" 
-        content={buttonText} 
+      <Button
+        variant='secondary'
+        content={buttonText}
         icon={icon}
         onPress={onPress}
       />

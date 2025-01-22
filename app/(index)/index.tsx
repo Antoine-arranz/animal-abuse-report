@@ -9,26 +9,22 @@ import Text from "@/components/common/typography/Text";
 
 export default function Index() {
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className='flex-1'>
       <ScrollView>
         <Logo />
         <Header />
         <WarningSection />
         <AlerteBandeau />
         <SignalementSection />
-        <View className="bg-gradient-primary py-6 px-4">
-          <Text 
-            variant="title" 
-            color="white" 
-            className="text-center"
-          >
-            Que dit la loi
+        <View className='bg-gradient-primary py-6 px-4'>
+          <Text variant='subtitle' color='white' className='text-center'>
+            Que dit la loi ?
           </Text>
-          <Text 
-            variant="title" 
-            weight="bold" 
-            color="white" 
-            className="text-center mt-4"
+          <Text
+            variant='subtitle'
+            weight='bold'
+            color='white'
+            className='text-center mt-4'
           >
             "Le fait, publiquement ou non, d'exercer des sévices graves ou de
             commettre un acte de cruauté envers un animal domestique ou un

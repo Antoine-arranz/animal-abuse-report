@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+import Text from "@/components/common/typography/Text";
 
 type TitleProps = {
   children: string;
@@ -7,7 +7,12 @@ type TitleProps = {
 
 export default function Title({ children, className = "" }: TitleProps) {
   return (
-    <Text className={`text-white text-center text-5xl font-bold ${className}`}>
+    <Text
+      variant='title'
+      weight='bold'
+      color='white'
+      className={`text-center text-5xl ${className}`}
+    >
       {children}
     </Text>
   );
