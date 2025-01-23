@@ -24,8 +24,8 @@ export default function Index() {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
         >
-          <Text variant='title' color='white' className='text-center'>
-            Que dit la loi
+          <Text variant='subtitle' color='white' weight="bold" className='text-center'>
+            Que dit la loi ?
           </Text>
           <Text
             variant='subtitle'
