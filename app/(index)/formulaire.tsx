@@ -5,27 +5,29 @@ import Text from "@/components/common/typography/Text";
 import { RadioButton } from "@/components/common/form/RadioButton";
 import { Dropdown } from "@/components/common/form/Dropdown";
 import { StatusBar } from "expo-status-bar";
-
+import AlerteBandeau from "@/components/AlertBandeau";
+import Button from "@/components/common/Button";
+import Card from "@/components/common/Card";
 interface FormData {
-  userType: "particulier" | "professionnel" | null;
-  isOngoing: boolean | null;
+  userType: "particulier" | "professionnel" | undefined;
+  isOngoing: boolean | undefined;
   whenHappened: string | null;
-  isDomesticAnimal: boolean | null;
+  isDomesticAnimal: boolean | undefined;
   animalType: string | null;
   animalCount: string | null;
-  isOwnAnimal: boolean | null;
+  isOwnAnimal: boolean | undefined;
   ownerType: string | null;
 }
 
 export default function FormulaireScreen() {
   const [formData, setFormData] = useState<FormData>({
-    userType: null,
-    isOngoing: null,
+    userType: undefined,
+    isOngoing: undefined,
     whenHappened: null,
-    isDomesticAnimal: null,
+    isDomesticAnimal: undefined,
     animalType: null,
     animalCount: null,
-    isOwnAnimal: null,
+    isOwnAnimal: undefined,
     ownerType: null,
   });
 
@@ -50,146 +52,164 @@ export default function FormulaireScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <StatusBar style="dark" />
-      <ScrollView className="p-4">
-        <Text variant="title" className="text-center mb-6">
+    <SafeAreaView className='flex-1 bg-white'>
+      <StatusBar style='dark' />
+      <ScrollView>
+        <Text variant='title' className='text-center mb-6'>
           Formulaire de signalement
         </Text>
-
-        <View className="space-y-6">
-          {/* Section 1 */}
-          <View>
-            <Text variant="subtitle" weight="bold" className="mb-4">
-              1 • Quelques précisions sur les faits et les animaux en cause
-            </Text>
-
-            <Text variant="body" className="mb-2">
-              Je souhaite signaler un animal maltraité en tant que :
-            </Text>
-            <RadioButton
-              options={[
-                { label: "Je suis un particulier", value: "particulier" },
-                { label: "Je suis un professionnel au contact des animaux", value: "professionnel" },
-              ]}
-              value={formData.userType}
-              onChange={(value) => setFormData({ ...formData, userType: value })}
-            />
-          </View>
-
-          {/* Faits en cours */}
-          <View>
-            <Text variant="body" className="mb-2">
-              Les faits sont-ils en train de se dérouler ?
-            </Text>
-            <RadioButton
-              options={[
-                { label: "Oui", value: true },
-                { label: "Non", value: false },
-              ]}
-              value={formData.isOngoing}
-              onChange={(value) => setFormData({ ...formData, isOngoing: value })}
-            />
-
-            {formData.isOngoing === true && (
-              <Text variant="body" color="error" className="mt-2">
-                Si vous êtes vous même en danger ou que l'animal victime de maltraitance est en danger de mort, appelez immédiatement le 17 !
+        <Card variant='elevated' padding='small'>
+          <View className='space-y-6'>
+            {/* Section 1 */}
+            <View>
+              <Text variant='subtitle' weight='bold' className='mb-4'>
+                1 • Quelques précisions sur les faits et les animaux en cause
               </Text>
-            )}
 
-            {formData.isOngoing === false && (
-              <View className="mt-4">
-                <Text variant="body" className="mb-2">
-                  Les faits datent de :
-                </Text>
-                <Dropdown
-                  options={whenOptions}
-                  value={formData.whenHappened}
-                  onValueChange={(value) => setFormData({ ...formData, whenHappened: value })}
-                  placeholder="Sélectionnez une période"
-                />
-              </View>
-            )}
-          </View>
+              <Text variant='body' className='mb-2' weight='bold'>
+                Je souhaite signaler un animal maltraité en tant que :
+              </Text>
+              <RadioButton
+                options={[
+                  { label: "Je suis un particulier", value: "particulier" },
+                  {
+                    label: "Je suis un professionnel au contact des animaux",
+                    value: "professionnel",
+                  },
+                ]}
+                value={formData.userType}
+                onChange={(value) =>
+                  setFormData({ ...formData, userType: value })
+                }
+              />
+            </View>
 
-          {/* Type d'animal */}
-          <View>
-            <Text variant="body" className="mb-2">
-              S'agit-il d'un animal domestique ou détenu en captivité ?
-            </Text>
-            <RadioButton
-              options={[
-                { label: "Oui", value: true },
-                { label: "Non (animaux libres, de la forêt et des campagnes)", value: false },
-              ]}
-              value={formData.isDomesticAnimal}
-              onChange={(value) => setFormData({ ...formData, isDomesticAnimal: value })}
-            />
-          </View>
+            {/* Faits en cours */}
+            <View>
+              <Text variant='body' className='mb-2' weight='bold'>
+                Les faits sont-ils en train de se dérouler ?
+              </Text>
+              <RadioButton
+                options={[
+                  { label: "Oui", value: true },
+                  { label: "Non", value: false },
+                ]}
+                value={formData.isOngoing}
+                onChange={(value) =>
+                  setFormData({ ...formData, isOngoing: value })
+                }
+              />
 
-          {formData.isDomesticAnimal && (
-            <>
-              <View>
-                <Text variant="body" className="mb-2">
-                  Quel animal est-il en cause :
-                </Text>
-                <Dropdown
-                  options={[
-                    { label: "Chien", value: "dog" },
-                    { label: "Chat", value: "cat" },
-                  ]}
-                  value={formData.animalType}
-                  onValueChange={(value) => setFormData({ ...formData, animalType: value })}
-                  placeholder="Sélectionnez un type d'animal"
-                />
-              </View>
+              {formData.isOngoing === true && <AlerteBandeau />}
 
-              <View>
-                <Text variant="body" className="mb-2">
-                  Combien d'animaux sont en cause ?
-                </Text>
-                <Dropdown
-                  options={animalCountOptions}
-                  value={formData.animalCount}
-                  onValueChange={(value) => setFormData({ ...formData, animalCount: value })}
-                  placeholder="Sélectionnez un nombre"
-                />
-              </View>
+              {formData.isOngoing === false && (
+                <View className='mt-4'>
+                  <Text variant='body' className='mb-2' weight='bold'>
+                    Les faits datent de :
+                  </Text>
+                  <Dropdown
+                    options={whenOptions}
+                    value={formData.whenHappened}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, whenHappened: value })
+                    }
+                    placeholder='Sélectionnez une période'
+                  />
+                </View>
+              )}
+            </View>
 
-              <View>
-                <Text variant="body" className="mb-2">
-                  S'agit-il de votre animal ?
-                </Text>
-                <RadioButton
-                  options={[
-                    { label: "Oui", value: true },
-                    { label: "Non", value: false },
-                  ]}
-                  value={formData.isOwnAnimal}
-                  onChange={(value) => setFormData({ ...formData, isOwnAnimal: value })}
-                />
-              </View>
+            {/* Type d'animal */}
+            <View>
+              <Text variant='body' className='mb-2' weight='bold'>
+                S'agit-il d'un animal domestique ou détenu en captivité ?
+              </Text>
+              <RadioButton
+                options={[
+                  { label: "Oui", value: true },
+                  {
+                    label: "Non (animaux libres, de la forêt et des campagnes)",
+                    value: false,
+                  },
+                ]}
+                value={formData.isDomesticAnimal}
+                onChange={(value) =>
+                  setFormData({ ...formData, isDomesticAnimal: value })
+                }
+              />
+            </View>
 
-          
+            {formData.isDomesticAnimal && (
+              <>
                 <View>
-                  <Text variant="body" className="mb-2">
-                    L'animal appartient-il à un professionnel ou un particulier ?
+                  <Text variant='body' className='mb-2' weight='bold'>
+                    Quel animal est-il en cause :
                   </Text>
                   <Dropdown
                     options={[
-                      { label: "Particulier", value: "particular" },
-                      { label: "Professionnel", value: "professional" },
+                      { label: "Chien", value: "dog" },
+                      { label: "Chat", value: "cat" },
                     ]}
-                    value={formData.ownerType}
-                    onValueChange={(value) => setFormData({ ...formData, ownerType: value })}
-                    placeholder="Sélectionnez un type de propriétaire"
+                    value={formData.animalType}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, animalType: value })
+                    }
+                    placeholder="Sélectionnez un type d'animal"
                   />
                 </View>
-             
-            </>
-          )}
-        </View>
+
+                <View>
+                  <Text variant='body' className='mb-2' weight='bold'>
+                    Combien d'animaux sont en cause ?
+                  </Text>
+                  <Dropdown
+                    options={animalCountOptions}
+                    value={formData.animalCount}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, animalCount: value })
+                    }
+                    placeholder='Sélectionnez un nombre'
+                  />
+                </View>
+              </>
+            )}
+            <View>
+              <Text variant='body' className='mb-2' weight='bold'>
+                S'agit-il de votre animal ?
+              </Text>
+              <RadioButton
+                options={[
+                  { label: "Oui", value: true },
+                  { label: "Non", value: false },
+                ]}
+                value={formData.isOwnAnimal}
+                onChange={(value) =>
+                  setFormData({ ...formData, isOwnAnimal: value })
+                }
+              />
+            </View>
+
+            <View>
+              <Text variant='body' className='mb-2' weight='bold'>
+                L'animal appartient-il à un professionnel ou un particulier ?
+              </Text>
+              <Dropdown
+                options={[
+                  { label: "Particulier", value: "particular" },
+                  { label: "Professionnel", value: "professional" },
+                ]}
+                value={formData.ownerType}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, ownerType: value })
+                }
+                placeholder='Sélectionnez un type de propriétaire'
+              />
+            </View>
+
+            <Button content='submit' onPress={handleSubmit} />
+          </View>
+        </Card>
       </ScrollView>
     </SafeAreaView>
   );
-} 
+}

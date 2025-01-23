@@ -1,6 +1,5 @@
 import { View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import { FontAwesome } from "@expo/vector-icons";
 
 interface Option {
   label: string;
@@ -14,9 +13,14 @@ interface DropdownProps {
   placeholder?: string;
 }
 
-export function Dropdown({ options, value, onValueChange, placeholder }: DropdownProps) {
+export function Dropdown({
+  options,
+  value,
+  onValueChange,
+  placeholder,
+}: DropdownProps) {
   return (
-    <View className="border border-gray-300 rounded-md">
+    <View className='border border-gray-300 rounded-md'>
       <RNPickerSelect
         onValueChange={onValueChange}
         items={options}
@@ -39,15 +43,7 @@ export function Dropdown({ options, value, onValueChange, placeholder }: Dropdow
             color: "black",
           },
         }}
-        Icon={() => (
-          <FontAwesome
-            name="chevron-down"
-            size={16}
-            color="gray"
-            style={{ padding: 15 }}
-          />
-        )}
       />
     </View>
   );
-} 
+}
