@@ -1,5 +1,6 @@
 import { Pressable, Text } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { Link } from "expo-router";
 
 interface ButtonProps {
   content: string;
@@ -33,6 +34,7 @@ export default function Button({
   };
 
   return (
+    <Link href='/formulaire' asChild>
     <Pressable 
       className={`
         ${variantStyles[variant]} 
@@ -61,6 +63,7 @@ export default function Button({
       `}>
         {content}
       </Text>
-    </Pressable>
+      </Pressable>
+      </Link>
   );
 } 

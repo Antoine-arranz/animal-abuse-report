@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import SignalementCard from "@/components/SignalementCard";
 import { HELPLINE_NUMBER } from "@/utils/constants";
+import { useNavigation } from "@/hooks/useNavigation";
 
 const signalements = [
   {
@@ -11,6 +12,7 @@ const signalements = [
       "Trouvez rapidement les bons interlocuteurs: commissariats, gendarmeries, associations, refuges, centres de soins, tribunaux, mairies ou DDPP.",
     buttonText: "Annuaire",
     icon: "map-pin" as const,
+    redirect: "./annuaire" as const,
   },
   {
     imageSource:
@@ -20,6 +22,7 @@ const signalements = [
       "Vous êtes témoin d'une maltraitance animale ? Remplissez notre formulaire de signalement et vous serez orienté.e vers les bons interlocuteurs.",
     buttonText: "Formulaire",
     icon: "wpforms" as const,
+    redirect: "./formulaire" as const,
   },
   {
     imageSource:
@@ -28,14 +31,20 @@ const signalements = [
     description: `Signalez sans perdre de temps une maltraitance animale au ${HELPLINE_NUMBER}. Un numéro d'écoute, de régulation et d'orientation. Ouvert 7/7, 365J/an, prix d'un appel local.`,
     buttonText: "Appeler",
     icon: "phone" as const,
+    redirect: "./Appeler" as const,
   },
-];
+] as const;
 
 export default function SignalementSection() {
+  const { navigateTo } = useNavigation();
   return (
-    <View className=' bg-secondary-gray'>
+    <View className=" bg-secondary-gray">
       {signalements.map((signalement, index) => (
-        <SignalementCard key={index} {...signalement} />
+        <SignalementCard
+          key={index}
+          {...signalement}
+          onPress={() =>navigateTo(signalement.redirect)}
+        />
       ))}
     </View>
   );

@@ -72,6 +72,12 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="formulaire"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }
